@@ -14,14 +14,22 @@ public class ProductRepository implements IRepository<Product> {
 
     @Override
     public boolean removeById(String id) {
+        for (Product item : products) {
+            if (item.getId().equals(id)) {
+                products.remove(item);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public Product findById(String id) {
-        if (productMap.containsKey(id)) {
-            System.out.println("San pham tim duoc la: " + productMap.get(id).getName());
-            return productMap.get(id);
+        for (Product product : products) {
+            if (product.getId().equals(id)) {
+                System.out.println("San pham tim thay la: " +product.getName());
+                return product;
+            }
         }
         return null;
     }
